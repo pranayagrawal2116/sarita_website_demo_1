@@ -1,41 +1,120 @@
-# Sarita Infotech Website & Workflow Demonstration
+# Sarita Infotech Website & Operations Demonstration
 
-React + TypeScript + Vite demonstration application for the Sarita Infotech public website, customer support, admin operations, demo scheduling and partner portal.
+A modern React + TypeScript + Vite web platform and workflow demonstration for **Sarita Infotech Pvt. Ltd.**, showcasing public product and service showcases, an interactive customer support ticketing system, an admin operations workspace, partner lead management, and demo scheduling.
 
-## Run locally
+---
+
+## 🌟 Overview
+
+This prototype models a complete corporate web presence and operational workflow suite for enterprise and institutional clients:
+
+- **Public Marketing & Solutions**: Comprehensive product landing pages, solutions by industry, services, resources, company overview, contact form, and SEO essentials (`robots.txt`, `sitemap.xml`).
+- **Core Product Suite**:
+  - 🏥 **Sarita HealthCare**: Connected hospital information system covering patient administration, clinical operations, billing, diagnostics, pharmacy, and ABDM / NHCX digital health interoperability readiness.
+  - 🚢 **Sarita Nimble**: Trade documentation, export/import management, shipment tracking, compliance, and invoice workflows.
+  - 🏦 **Sarita BankWare**: Core cooperative banking and credit society operations platform for deposits, loans, collections, and branch reporting.
+  - 🛍️ **Sarita Retail**: Unified inventory management, point-of-sale, purchase workflows, and multi-location visibility.
+- **Customer Support Portal (`/customer`)**: Role-protected dashboard for tracking support requests, submitting new tickets with category/priority/attachments, and conversing with support agents.
+- **Admin Operations Console (`/admin`)**: Operations management queue for cross-account tickets, assignment, internal notes separation, status updates, and interactive demo agenda management.
+- **Partner Portal (`/partners`)**: Dedicated workspace for registered channel partners to register leads, track opportunities, and access enablement resources.
+- **Demo Request System (`/request-demo`)**: Interactive scheduling flow with product selection, date validation, and reference ID generation.
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js (v18.0.0 or higher recommended)
+- npm or yarn
+
+### Installation & Local Run
 
 ```bash
-cd /Users/pranay/Documents/Development/CodexWork/sarita-infotech-web
+# Clone the repository
+git clone https://github.com/pranayagrawal2116/sarita_website_demo_1.git
+cd sarita_website_demo_1
+
+# Install dependencies
 npm install
+
+# Start Vite development server
 npm run dev
 ```
 
-Then open the URL printed by Vite (normally `http://localhost:5173`). Production verification:
+Open the local development URL (typically `http://localhost:5173`) in your browser.
+
+### Production Build
 
 ```bash
+# Type check and build bundle
 npm run build
+
+# Preview production build locally
 npm run preview
 ```
 
-## Demo mode
+---
 
-This is an explicitly isolated client-side demonstration. Any valid-format email and a password of eight or more characters opens the matching portal. Data lives only in the active browser session and is never presented as real, persistent, multi-user data.
+## 🔑 Demo Mode & Access Credentials
 
-- `/customer/login` leads to customer support. New registrations remain **Pending Approval**.
-- `/admin/login` opens the clearly-labelled mock admin workspace.
-- `/partners/login` opens the isolated mock partner workspace.
-- `/request-demo` creates a request with **Awaiting Confirmation** status; it never claims a calendar booking or email notification.
+This application runs in an isolated client-side demonstration mode with in-memory state:
+- Any valid email address (e.g., `user@example.com`) and a password of **8 or more characters** will authenticate.
+- **Portals**:
+  - `/customer/login`: Customer Support Portal (pre-seeded with demo account *Asterwell Hospital*)
+  - `/admin/login`: Operations Admin Console
+  - `/partners/login`: Channel Partner Portal
+  - `/request-demo`: Request product demonstrations with reference code assignment
 
-## Implemented workflows
+> [!NOTE]
+> All session data lives purely in the active browser memory for safe demonstration purposes. No persistent customer data or real emails are dispatched in demo mode.
 
-- Public marketing routes, product pages, service/industry informational routes, legal pages, responsive navigation, branded 404, robots directives and sitemap.
-- Four product detail pages, including clearly qualified ABDM and NHCX sections on Sarita HealthCare.
-- Customer route protection, registration approval messaging, dashboard, ticket list/search, ticket creation, ticket details and customer replies.
-- Admin route protection, metrics derived from mock records, ticket workspace, ticket assignment/status controls, customer-only/internal note separation, and demo status controls.
-- Partner route protection, partner dashboard and isolated lead-registration experience.
+---
 
-## Production integration checklist
+## 🛠️ Tech Stack
 
-Before using this beyond demonstration mode, connect a server-side auth provider (for example Supabase Auth) and database; implement row-level organization isolation and roles; move ticket/demo/lead ID generation to the database; validate inputs server-side; store attachments privately; add audit history; configure CSRF/rate limiting/session security; integrate transactional email and an availability-aware calendar; add accessibility and security testing; then replace all mock-mode labels only after those systems are verified.
+- **Framework**: React 18
+- **Language**: TypeScript (strict mode)
+- **Bundler & Dev Server**: Vite 5
+- **Routing**: React Router v6 (`react-router-dom`)
+- **Icons**: Lucide React (`lucide-react`)
+- **Styling**: Modern responsive CSS with custom design tokens and semantic layout
 
-Suggested core tables: `profiles`, `organizations`, `organization_members`, `customer_accounts`, `tickets`, `ticket_messages`, `ticket_internal_notes`, `ticket_history`, `ticket_attachments`, `demo_requests`, `demo_appointments`, `partners`, `partner_leads`, `partner_opportunities`, and `notifications`.
+---
+
+## 📁 Project Structure
+
+```text
+sarita-infotech-web/
+├── public/
+│   ├── robots.txt          # Search crawler directives
+│   └── sitemap.xml         # SEO site map
+├── src/
+│   ├── main.tsx            # Routes, portals, state, and UI components
+│   ├── styles.css          # Responsive styling, layout grid, typography, tokens
+│   └── vite-env.d.ts       # Vite client TypeScript declarations
+├── index.html              # HTML5 entrypoint with metadata and fonts
+├── package.json            # Project dependencies and build scripts
+├── tsconfig.json           # TypeScript configuration
+└── vite.config.ts          # Vite build and plugin configuration
+```
+
+---
+
+## 📋 Production Integration Roadmap
+
+To transition this demonstration into full multi-tenant production:
+1. **Authentication & Identity**: Integrate an enterprise auth provider (e.g., Supabase Auth, Firebase Auth, or Auth0) with MFA and RBAC.
+2. **Database & Persistence**: Implement PostgreSQL / Cloud SQL schema with Row-Level Security (RLS) for tenant isolation:
+   - `profiles`, `organizations`, `customer_accounts`
+   - `tickets`, `ticket_messages`, `ticket_internal_notes`, `ticket_attachments`
+   - `demo_requests`, `demo_appointments`
+   - `partners`, `partner_leads`, `partner_opportunities`
+3. **Storage & Attachments**: Secure private object storage (S3 / GCS) with presigned upload URLs and virus scanning for ticket attachments.
+4. **Notifications & Calendar**: Integrate transactional email/SMS (SendGrid, Postmark) and calendar availability sync (Google Calendar / Outlook / Cal.com).
+5. **Auditing & Compliance**: Add immutable audit logging for administrative actions, ticket status modifications, and partner lead attribution.
+
+---
+
+## 📄 License
+
+Private & Confidential · Developed for **Sarita Infotech Pvt. Ltd.**
