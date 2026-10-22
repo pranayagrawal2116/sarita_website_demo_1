@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /customer/
+Disallow: /admin/
+Disallow: /partners/dashboard
+Disallow: /partners/leads
